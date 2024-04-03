@@ -13,7 +13,7 @@ class PlateReaderClient:
             json={'id': image_id},
         )
         return res.json()
-    
+
     def read_plate_ids(self, image_ids: list[Any]) -> dict[str]:
         res = requests.post(
             f'{self.host}/ReadImgIds',

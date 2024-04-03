@@ -1,19 +1,16 @@
-from models.plate_reader import PlateReader
 from config import Vars, Errors
 import io
 from models.plate_reader import PlateReader, InvalidImage
 import logging
-from typing import Optional
 import requests
-
 
 
 def check_image_id(image_id: str) -> bool:
     '''
-    Function for validating image id 
+    Function for validating image id
     '''
     if not isinstance(image_id, str) or not image_id.isdecimal() or \
-    image_id not in Vars.AVAILABLE_IDS or image_id[0] == '0':
+            image_id not in Vars.AVAILABLE_IDS or image_id[0] == '0':
         return False
     return True
 
@@ -46,7 +43,6 @@ def plate_reader_by_id(plate_reader: PlateReader, image_id: str) -> str | tuple:
     if isinstance(image, str):
         return image
     image = io.BytesIO(image)
-
     try:
         res = plate_reader.read_text(image)
         return res
